@@ -26,12 +26,12 @@ jobs:
 
       - name: Build and push Docker image for dg-database
         run: |
-          cd ../dg-database
+          cd dg-database
           docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-database:latest .
           docker push ${{ secrets.REGISTRY_USERNAME }}/dg-database:latest
 
       - name: Build and push Docker image for dg-frontend
         run: |
-          cd ../dg-frontend
+          cd dg-frontend
           docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:latest .
           docker push ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:latest
