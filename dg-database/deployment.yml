@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dg-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dg-database
+  template:
+    metadata:
+      labels:
+        app: dg-database
+    spec:
+      containers:
+        - name: dg-database
+          image: cstrab/dg-database:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"

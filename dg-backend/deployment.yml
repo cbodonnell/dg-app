@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dg-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dg-backend
+  template:
+    metadata:
+      labels:
+        app: dg-backend
+    spec:
+      containers:
+        - name: dg-backend
+          image: cstrab/dg-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"

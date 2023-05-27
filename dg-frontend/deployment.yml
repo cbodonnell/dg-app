@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dg-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dg-frontend
+  template:
+    metadata:
+      labels:
+        app: dg-frontend
+    spec:
+      containers:
+        - name: dg-frontend
+          image: cstrab/dg-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
