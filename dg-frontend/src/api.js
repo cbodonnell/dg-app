@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://dg-backend:8000', // Production only
+  baseURL: 'https://dg-app.strab.io/backend', // Production only
+  // baseURL: 'http://dg-backend:8000', // Within cluster only
   // baseURL: 'http://localhost:8000', // Local testing only
 });
 
