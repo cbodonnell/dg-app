@@ -1,7 +1,8 @@
 # Use the official PostgreSQL image as the base image
 FROM postgres
 
-# Set the environment variable for the PostgreSQL password
+# Default environment variables for the PostgreSQL
+ENV POSTGRES_USERNAME=postgres
 ENV POSTGRES_PASSWORD=postgres
 ENV POSTGRES_DB=dg_database
 

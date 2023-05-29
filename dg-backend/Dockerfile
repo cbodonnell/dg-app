@@ -1,6 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9
 
+# Default local testing environment variable
+ENV DATABASE_URL="postgresql://postgres:postgres@dg-database:5432/dg_database"
+
 # Set the working directory to /app
 WORKDIR /app
 

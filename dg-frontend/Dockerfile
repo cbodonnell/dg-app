@@ -1,6 +1,9 @@
 # Use base node image for the build stage
 FROM node:18.16.0 as build
 
+# Default local testing environment variable
+ENV API_URL="http://localhost:8000"
+
 # Set the working directory in the container to /app
 WORKDIR /app
 
