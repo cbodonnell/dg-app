@@ -10,7 +10,6 @@ dg-frontend:
     requests:
       cpu: "0.5"
       memory: "256Mi"
-  apiUrl: "https://dg-app.strab.io/backend"
 dg-backend:
   replicas: 1
   image: cstrab/dg-backend:latest
@@ -23,10 +22,9 @@ dg-backend:
     requests:
       cpu: "0.5"
       memory: "256Mi"
-  databaseUrl: "postgresql://postgres:postgres@dg-database:5432/dg_database"
 dg-database:
   replicas: 1
-  image: cstrab/dg-database:latest
+  image: postgres:latest
   containerPort: 5432
   servicePort: 5432
   resources:
@@ -36,6 +34,3 @@ dg-database:
     requests:
       cpu: "0.5"
       memory: "256Mi"
-  postgresUsername: "postgres"
-  postgresPassword: "postgres"
-  postgresDb: "dg_database"
