@@ -10,4 +10,3 @@ resources:
   requests:
     cpu: "0.5"
     memory: "256Mi"
-databaseUrl: "postgresql://postgres:postgres@dg-database:5432/dg_database"

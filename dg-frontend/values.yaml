@@ -10,4 +10,3 @@ resources:
   requests:
     cpu: "0.5"
     memory: "256Mi"
-apiUrl: "https://dg-app.strab.io/backend"

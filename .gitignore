@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore .tgz files
 **/*.tgz
+
+# Ignore k8s manifest secrets
+secrets.yaml

@@ -17,8 +17,11 @@ spec:
           image: {{ .Values.image }}
           imagePullPolicy: Always
           env:
-            - name: DATABASE_URL
-              value: {{ .Values.databaseUrl }}
+          - name: DATABASE_URL
+            valueFrom: 
+              secretKeyRef:
+                name: dg-app-secrets
+                key: db_url
           ports:
             - containerPort: {{ .Values.containerPort }}
           resources:

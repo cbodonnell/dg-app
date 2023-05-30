@@ -1,6 +1,6 @@
 name: dg-database
 replicas: 1
-image: cstrab/dg-database:latest
+image: postgres:latest
 containerPort: 5432
 servicePort: 5432
 resources:
@@ -10,6 +10,3 @@ resources:
   requests:
     cpu: "0.5"
     memory: "256Mi"
-postgresUsername: "postgres"
-postgresPassword: "postgres"
-postgresDb: "dg_database"
