@@ -23,17 +23,26 @@ jobs:
       - name: Build and push Docker image for dg-backend
         run: |
           cd dg-backend
-          docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-backend:latest .
-          docker push ${{ secrets.REGISTRY_USERNAME }}/dg-backend:latest
-
-      - name: Build and push Docker image for dg-database
-        run: |
-          cd dg-database
-          docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-database:latest .
-          docker push ${{ secrets.REGISTRY_USERNAME }}/dg-database:latest
+          docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-backend:${{ github.sha }} .
+          docker push ${{ secrets.REGISTRY_USERNAME }}/dg-backend:${{ github.sha }}
 
       - name: Build and push Docker image for dg-frontend
         run: |
           cd dg-frontend
-          docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:latest .
-          docker push ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:latest
+          docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }} .
+          docker push ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }}
+
+      - name: Set up Kubernetes context
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.20.0'
+        
+      - name: Configure Kubernetes credentials
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > /tmp/config
+          echo "KUBECONFIG=/tmp/config" >> $GITHUB_ENV
+
+      - name: Update ArgoCD application
+        run: |
+          sed -i "s/<git-commit-sha>/${{ github.sha }}/g" dg-argocd/app.yaml
+          kubectl apply -f dg-argocd/app.yaml

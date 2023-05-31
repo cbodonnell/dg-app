@@ -6,3 +6,6 @@ node_modules/
 
 # Ignore k8s manifest secrets
 secrets.yaml
+
+# Ignore kubeconfig.yaml
+kubeconfig.yaml
