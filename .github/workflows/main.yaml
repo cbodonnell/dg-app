@@ -13,6 +13,7 @@ on:
 
 jobs:
   build_and_push_images:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -40,8 +41,8 @@ jobs:
 
       - name: Update Helm values with new image tags
         run: |
-          sed -i "s|dg-backend:.*$|dg-backend:${{ github.sha }}|g" dg-app/values.yaml
-          sed -i "s|dg-frontend:.*$|dg-frontend:${{ github.sha }}|g" dg-app/values.yaml
+          sed -i "s|image: cstrab/dg-backend:.*$|image: cstrab/dg-backend:${{ github.sha }}|g" dg-app/values.yaml
+          sed -i "s|image: cstrab/dg-frontend:.*$|image: cstrab/dg-frontend:${{ github.sha }}|g" dg-app/values.yaml
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add dg-app/values.yaml
