@@ -14,9 +14,9 @@ spec:
         - values.yaml
       parameters:
         - name: dg-frontend.image
-          value: cstrab/dg-frontend:<git-commit-sha>
+          value: cstrab/dg-frontend:latest
         - name: dg-backend.image
-          value: cstrab/dg-backend:<git-commit-sha>
+          value: cstrab/dg-backend:latest
   destination:
     server: https://kubernetes.default.svc
     namespace: default

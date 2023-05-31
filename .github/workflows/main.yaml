@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Log in to Docker registry
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
@@ -32,17 +35,12 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }} .
           docker push ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }}
 
-      - name: Set up Kubernetes context
-        uses: azure/setup-kubectl@v1
-        with:
-          version: 'v1.20.0'
-        
-      - name: Configure Kubernetes credentials
+      - name: Update Helm values with new image tags
         run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > /tmp/config
-          echo "KUBECONFIG=/tmp/config" >> $GITHUB_ENV
-
-      - name: Update ArgoCD application
-        run: |
-          sed -i "s/<git-commit-sha>/${{ github.sha }}/g" dg-argocd/app.yaml
-          kubectl apply -f dg-argocd/app.yaml
+          sed -i "s|dg-backend:.*$|dg-backend:${{ github.sha }}|g" dg-app/values.yaml
+          sed -i "s|dg-frontend:.*$|dg-frontend:${{ github.sha }}|g" dg-app/values.yaml
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add dg-app/values.yaml
+          git commit -m "Update image tags"
+          git push
