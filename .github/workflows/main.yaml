@@ -8,6 +8,8 @@ on:
       - reopened
     branches:
       - main
+    paths-ignore:
+      - 'dg-app/values.yaml'
 
 jobs:
   build_and_push_images:
@@ -17,8 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to Docker registry
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
@@ -42,5 +45,5 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add dg-app/values.yaml
-          git commit -m "Update image tags"
+          git commit -m "update image tags"
           git push
