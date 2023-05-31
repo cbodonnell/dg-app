@@ -23,7 +23,7 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/rounds/", response_model=schemas.RoundInfoResponse)
+@app.post("/rounds", response_model=schemas.RoundInfoResponse)
 def create_round_endpoint(round_info: schemas.RoundInfoCreate, db: Session = Depends(get_db)):
     return crud.create_round(db, round_info)
 

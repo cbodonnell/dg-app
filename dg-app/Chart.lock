@@ -1,0 +1,12 @@
+dependencies:
+- name: dg-frontend
+  repository: file://../dg-frontend
+  version: 0.1.0
+- name: dg-backend
+  repository: file://../dg-backend
+  version: 0.1.0
+- name: dg-database
+  repository: file://../dg-database
+  version: 0.1.0
+digest: sha256:8548044efe27c930e6349746e4cfd124b7f0ae83009c34d4023b8cf587af8bcb
+generated: "2023-05-29T12:59:40.531776-04:00"

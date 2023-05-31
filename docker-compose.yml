@@ -4,9 +4,6 @@ services:
     build: ./dg-database
     volumes:
       - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: dg_database
     ports:
       - 5432:5432
     networks:
@@ -18,8 +15,6 @@ services:
       - 8000:8000
     depends_on:
       - dg-database
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@dg-database:5432/dg_database
     networks:
       - dg-network
 
