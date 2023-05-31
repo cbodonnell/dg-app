@@ -46,4 +46,5 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add dg-app/values.yaml
           git commit -m "update image tags"
-          git push
+          git push https://${{ secrets.PERSONAL_ACCESS_TOKEN }}:x-oauth-basic@github.com/cstrab/dg-app.git
+
