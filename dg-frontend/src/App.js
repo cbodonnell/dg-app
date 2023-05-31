@@ -19,6 +19,11 @@ const NewRound = () => {
     setPlayers([...players, { name: '', scores }]);
   };
 
+  const handleRemovePlayer = (index) => {
+    const updatedPlayers = players.filter((_, i) => i !== index);
+    setPlayers(updatedPlayers);
+  };
+
   const handlePlayerNameChange = (index, name) => {
     const updatedPlayers = players.map((player, i) =>
       i === index ? { ...player, name } : player
@@ -82,6 +87,7 @@ const NewRound = () => {
               value={player.name}
               onChange={(e) => handlePlayerNameChange(playerIndex, e.target.value)}
             />
+            <Button onClick={() => handleRemovePlayer(playerIndex)}>Remove Player</Button>
           </Grid>
           {[...Array(18)].map((_, holeIndex) => (
             <Grid item xs={1} key={holeIndex}>
