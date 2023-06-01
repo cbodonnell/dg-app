@@ -1,4 +1,4 @@
-dg-frontend:4562ada8e1295b33ca305c220f53fda4b73f4f67
+dg-frontend:
   replicas: 1
   image: cstrab/dg-frontend:7d3c0d93fc93084a15a8a870c1cc250f1856279e
   containerPort: 3000
@@ -10,7 +10,7 @@ dg-frontend:4562ada8e1295b33ca305c220f53fda4b73f4f67
     requests:
       cpu: "0.5"
       memory: "256Mi"
-dg-backend:4562ada8e1295b33ca305c220f53fda4b73f4f67
+dg-backend:
   replicas: 1
   image: cstrab/dg-backend:7d3c0d93fc93084a15a8a870c1cc250f1856279e
   containerPort: 8000
