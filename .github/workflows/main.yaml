@@ -24,6 +24,14 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      - name: Check if last commit was made by GitHub Actions
+        id: last_commit
+        run: echo "::set-output name=actor::$(git log -1 --pretty=format:'%an')"
+
+      - name: Exit if last commit was made by GitHub Actions
+        if: steps.last_commit.outputs.actor == 'github-actions[bot]'
+        run: exit 0
+
       - name: Log in to Docker registry
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
 
