@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dg-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/cstrab/dg-app.git
+    targetRevision: main 
+    path: dg-app
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: dg-frontend.image
+          value: cstrab/dg-frontend:latest
+        - name: dg-backend.image
+          value: cstrab/dg-backend:latest
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
