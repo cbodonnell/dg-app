@@ -28,25 +28,25 @@ jobs:
         run: echo "LAST_AUTHOR=$(git log -1 --pretty=format:'%an')" >> $GITHUB_ENV
 
       - name: Log in to Docker registry
-        if: env.LAST_AUTHOR != 'github-actions[bot]'
+        if: env.LAST_AUTHOR != 'github-actions'
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
 
       - name: Build and push Docker image for dg-backend
-        if: env.LAST_AUTHOR != 'github-actions[bot]'
+        if: env.LAST_AUTHOR != 'github-actions'
         run: |
           cd dg-backend
           docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-backend:${{ github.sha }} .
           docker push ${{ secrets.REGISTRY_USERNAME }}/dg-backend:${{ github.sha }}
 
       - name: Build and push Docker image for dg-frontend
-        if: env.LAST_AUTHOR != 'github-actions[bot]'
+        if: env.LAST_AUTHOR != 'github-actions'
         run: |
           cd dg-frontend
           docker build -t ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }} .
           docker push ${{ secrets.REGISTRY_USERNAME }}/dg-frontend:${{ github.sha }}
 
       - name: Update Helm values with new image tags
-        if: env.LAST_AUTHOR != 'github-actions[bot]'
+        if: env.LAST_AUTHOR != 'github-actions'
         run: |
           sed -i "s|image: cstrab/dg-backend:.*$|image: cstrab/dg-backend:${{ github.sha }}|g" dg-app/values.yaml
           sed -i "s|image: cstrab/dg-frontend:.*$|image: cstrab/dg-frontend:${{ github.sha }}|g" dg-app/values.yaml
