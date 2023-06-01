@@ -1,6 +1,6 @@
 dg-frontend:
   replicas: 1
-  image: cstrab/dg-frontend:fe6833529ddaeeae27aa85ad3c606bb4b8f9dd3c
+  image: cstrab/dg-frontend:500b8f6d6cb7508f4fe2df464123dc5a158656fd
   containerPort: 3000
   servicePort: 3000
   resources:
@@ -12,7 +12,7 @@ dg-frontend:
       memory: "256Mi"
 dg-backend:
   replicas: 1
-  image: cstrab/dg-backend:fe6833529ddaeeae27aa85ad3c606bb4b8f9dd3c
+  image: cstrab/dg-backend:500b8f6d6cb7508f4fe2df464123dc5a158656fd
   containerPort: 8000
   servicePort: 8000
   resources:
