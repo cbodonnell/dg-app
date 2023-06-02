@@ -5,8 +5,8 @@ dependencies:
 - name: dg-backend
   repository: file://../dg-backend
   version: 0.1.0
-- name: dg-database
-  repository: file://../dg-database
-  version: 0.1.0
-digest: sha256:8548044efe27c930e6349746e4cfd124b7f0ae83009c34d4023b8cf587af8bcb
-generated: "2023-05-29T12:59:40.531776-04:00"
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.1.2
+digest: sha256:8ab690b954fece3e9bea95af3d649c3770fc9c8072515aaefa6d52953ccddd21
+generated: "2023-06-02T15:22:57.188101-04:00"

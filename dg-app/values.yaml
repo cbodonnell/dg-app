@@ -22,15 +22,21 @@ dg-backend:
     requests:
       cpu: "0.5"
       memory: "256Mi"
-dg-database:
-  replicas: 1
-  image: postgres:latest
-  containerPort: 5432
-  servicePort: 5432
-  resources:
-    limits:
-      cpu: "1"
-      memory: "512Mi"
-    requests:
-      cpu: "0.5"
-      memory: "256Mi"
+postgresql:
+  global:
+    postgresql:
+      auth:
+        username: "user"
+        database: "dg_database"
+        existingSecret: dg-app-secrets
+        secretKeys:
+          adminPasswordKey: db_admin_password
+          userPasswordKey: db_user_password
+          replicationPasswordKey: db_rep_password
+  persistence:
+    enabled: true
+    storageClass: "longhorn"
+    size: 1Gi
+
+
+
