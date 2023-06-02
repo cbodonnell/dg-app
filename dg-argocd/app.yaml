@@ -12,11 +12,6 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-      parameters:
-        - name: dg-frontend.image
-          value: cstrab/dg-frontend:latest
-        - name: dg-backend.image
-          value: cstrab/dg-backend:latest
   destination:
     server: https://kubernetes.default.svc
     namespace: default
