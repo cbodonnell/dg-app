@@ -3,7 +3,7 @@ import { Text, View } from '@/components/Themed';
 import PostListItem from '@/components/PostListItem';
 import posts from '../../../assets/data/posts.json';
 
-const firstPost = posts[0]
+const firstPost = posts[2]
 
 export default function TabOneScreen() {
   return (
@@ -16,16 +16,9 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });

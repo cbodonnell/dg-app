@@ -51,9 +51,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="view-round"
+        name="view-rounds"
         options={{
-          title: 'View Round',
+          title: 'View Rounds',
           tabBarIcon: ({ color }) => <TabBarIcon name="bar-chart" color={color} />,
         }}
       />
